@@ -81,7 +81,7 @@ body('password').isLength({ min: 4 })
     })
 
 /////////////////////// get all users ////////////////////////////////
-  router.get('/', async(req, res)=> {
+  router.get('/',auth, async(req, res)=> {
   
     const users= await User.find();
     
