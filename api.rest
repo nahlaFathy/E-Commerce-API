@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/users/userlogin
+{
+    "email":"nehal.fathy",
+    "password":"565478"
+}
+
+
+###
+POST http://localhost:3000/api/users/register
+
+{
+    "email":"nehal.fathy@gmail.com",
+    "username":"nehal",
+    "password":"12345",
+    "gender":"female"s
+}
