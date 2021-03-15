@@ -62,10 +62,10 @@ body('title').isLength({ min: 1 })
 //////////////////////// get all products /////////////////////////////
 
 router.get('/',auth,  async(req, res)=> {
-     
-    const products= await Product.find()
-      if(products) return res.send('Products list :'+products)
- 
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      const products= await Product.find()
+     // if(products) return res.send('Products list :'+products)
+          res.send("moussa: sssssssssssss");
     })
 
 ///////////////////////// edit product by id //////////////////////////////////
