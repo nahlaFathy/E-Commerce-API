@@ -23,7 +23,7 @@ body('password').isLength({ min: 4 })
 .withMessage('password is required')
 , body('gender').isLength({ min: 1 })
 .withMessage('gender is required')
-,upload, async(req, res) => {
+, async(req, res) => {
        ///// body validation
        
        const errors = validationResult(req); 
@@ -33,7 +33,7 @@ body('password').isLength({ min: 4 })
        let isUser=await User.findOne({username:req.body.username})
        if(isUser) return res.status(400).send('user already registered') 
        ///////////////check if image uploaded 
-      if (!req.files || _.isEmpty(req.files)) {
+    /*  if (!req.files || _.isEmpty(req.files)) {
         return res.status(400)
             .send({error:"No file uploaded"})    }
     try {
@@ -43,13 +43,13 @@ body('password').isLength({ min: 4 })
       } catch (e) {
         console.log("err :", e);
         return next(e);
-    }
+    }*/
        ////// create new user
        const user =new User({
          email:req.body.email,
          username:req.body.username,
          password:req.body.password,
-         image:image.url,
+        //// image:image.url,
          gender:req.body.gender
         
         });
