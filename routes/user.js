@@ -74,7 +74,7 @@ body('password').isLength({ min: 4 })
          ///// body validation
         try{
           let image =  await cloudinary(req.file.path);             
-         return res.send(image.url)
+         return res.send(`${image.url}, ${image.public_id}`)
         }catch(e){
           return res.send({error:e})
         } 

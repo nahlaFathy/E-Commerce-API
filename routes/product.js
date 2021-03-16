@@ -11,7 +11,7 @@ let imageUrl;
 
 //////////////////// add new product //////////////////////////////
 
-router.post('/add',auth,upload,
+router.post('/add',auth,
 body('title').isLength({ min: 1 })
 .withMessage('title is required')
 , body('price').isLength({ min: 1 })
@@ -22,7 +22,8 @@ body('title').isLength({ min: 1 })
        const errors = validationResult(req); 
        if (!errors.isEmpty()) return res.status(400).send({error: errors.errors[0].msg }); 
         ///////////////check if image uploaded 
-        if (!req.files || _.isEmpty(req.files)) {
+       ///////
+       /* if (!req.files || _.isEmpty(req.files)) {
           return res.status(400)
               .send({error:"No file uploaded"})
       }
@@ -33,13 +34,13 @@ body('title').isLength({ min: 1 })
         } catch (e) {
           console.log("err :", e);
           return next(e);
-      }
+      }*/
        const product =new Product({
           title:req.body.title,
           price:req.body.price,
           details:req.body.details,
-          image:image.url,
-         cloudinary_id: image.public_id
+          image:req.body.image,
+         cloudinary_id: req.body. cloudinary_id
        })
     try{
         await product.save()
