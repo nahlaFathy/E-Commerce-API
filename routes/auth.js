@@ -35,7 +35,7 @@ body('password').isLength({ min: 1 })
        //if (user.isActive != true) return res.status(404).send("Please verify your email to login.");
     
         /////////// create token by user id //////////
-       const token=jwt.sign({_id:user._id,isAdmin:false},process.env.SECRET_KEY)
+       const token=jwt.sign({_id:user._id},process.env.SECRET_KEY)
      return res.header('x-token',token).send({message:'logined in successfully',isAdmin:user.isAdmin,
         token:token}) 
     

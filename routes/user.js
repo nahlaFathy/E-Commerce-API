@@ -50,7 +50,8 @@ body('password').isLength({ min: 4 })
          username:req.body.username,
          password:req.body.password,
         //// image:image.url,
-         gender:req.body.gender
+         gender:req.body.gender,
+         isAdmin:req.body.isAdmin
         
         });
        //// hashing password
