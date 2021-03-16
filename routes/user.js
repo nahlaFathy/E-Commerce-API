@@ -33,17 +33,7 @@ body('password').isLength({ min: 4 })
        let isUser=await User.findOne({username:req.body.username})
        if(isUser) return res.status(400).send('user already registered') 
        ///////////////check if image uploaded 
-    /*  if (!req.files || _.isEmpty(req.files)) {
-        return res.status(400)
-            .send({error:"No file uploaded"})    }
-    try {
-        
-         image =  await cloudinary(req.file.path);
-        
-      } catch (e) {
-        console.log("err :", e);
-        return next(e);
-    }*/
+    
        ////// create new user
        const user =new User({
          email:req.body.email,
@@ -70,15 +60,34 @@ body('password').isLength({ min: 4 })
     }
     
   })
-  router.post('/image',upload
+  router.post('/image',auth,upload
   , async(req, res) => {
-         ///// body validation
-        try{
-          let image =  await cloudinary(req.file.path);             
-         return res.send(`${image.url}, ${image.public_id}`)
-        }catch(e){
-          return res.send({error:e})
-        } 
+    const loginedID=req.user._id
+    const user= await User.findById(loginedID);
+         if (!req.files || _.isEmpty(req.files)) {
+        return res.status(400)
+            .send({error:"No file uploaded"})    }
+        try {
+        
+          await cloudinary.uploader.destroy(user.cloudinary_id);
+          const image = await cloudinary(req.file.path);
+      } catch (e) {
+        console.log("err :", e);
+        return next(e);
+    }
+    
+    const updates={
+      image:image.url||user.image,
+      cloudinary_id:image.public_id||user.cloudinary_id      
+     }
+     user = await User.findByIdAndUpdate(loginedID, updates, {
+       new: true
+       });
+     if(user)
+       return res.send({message:'user was edited successfully',image:user.image})
+     else
+       return  res.send({message:'This user id is not exist'})
+      
     })
 
 /////////////////////// get all users ////////////////////////////////
@@ -107,7 +116,7 @@ body('password').isLength({ min: 4 })
          image:image.url||user.image,
          cloudinary_id:image.public_id||user.cloudinary_id      
         }
-        user = await User.findByIdAndUpdate(loginedID, data, {
+        user = await User.findByIdAndUpdate(loginedID, updates, {
           new: true
           });
         if(user)
