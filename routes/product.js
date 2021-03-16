@@ -63,7 +63,7 @@ body('title').isLength({ min: 1 })
 
 router.get('/',auth,  async(req, res)=> {
     const products= await Product.find()
-      if(products) return res.send({'Products list :':products})
+      if(products) return res.send({'productslist :':products})
  
     })
 
