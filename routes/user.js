@@ -68,7 +68,7 @@ body('password').isLength({ min: 4 })
             .send({error:"No file uploaded"})    }
         try {
         
-          await cloudinary.uploader.destroy(user.cloudinary_id);
+         // await cloudinary.uploader.destroy(user.cloudinary_id);
           const image = await cloudinary(req.file.path);
       } catch (e) {
         console.log("err :", e);
