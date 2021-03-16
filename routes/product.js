@@ -102,7 +102,7 @@ router.patch('/:id',auth, async(req, res) => {
 
         const product= await Product.findById(req.params.id);
         if(!product) return res.send({error:'this product id is not exist'})
-        await cloudinary.uploader.destroy(product.cloudinary_id);
+        //await cloudinary.uploader.destroy(product.cloudinary_id);
         await Product.deleteOne(product)
         return res.send({message:'product deleted successfuly'})
         
