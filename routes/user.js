@@ -59,7 +59,7 @@ body('password').isLength({ min: 4 })
     }
     
   })
-  router.post('/image',auth,upload
+  router.patch('/image',auth,upload
   , async(req, res) => {
     const loginedID=req.user._id
     const user= await User.findById(loginedID);
