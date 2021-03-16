@@ -9,6 +9,7 @@ const product = require('./routes/product');
 const order = require('./routes/order');
 const auth = require('./routes/auth');
 const cart = require('./routes/cart');
+var cors = require('cors')
 
 require('dotenv').config();
 
@@ -41,7 +42,7 @@ app.use('/api/order', order);
 app.use('/api/cart', cart);
 app.use('/api/users', auth);
 app.use('/api/admin', auth);
-
+app.use(cors())
 // a global error handler that logs the error 
 app.use((err, req, res, next) => {
   console.error(err)
