@@ -4,7 +4,7 @@ const jwt=require('jsonwebtoken')
 //////////////check header token if exist and valid or no /////////////////
 module.exports=function auth(req,res,next)
 {    
-    const token=req.header('x-token')
+    const token=req.header('user-token')
     if(!token) return res.status(401).send({error:'Access Denied'})
     try{
         const decoded= jwt.verify(token,process.env.SECRET_KEY)

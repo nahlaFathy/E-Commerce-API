@@ -32,11 +32,11 @@ body('password').isLength({ min: 1 })
        if(validPassword===false)return res.status(400).send('invalid email or password') 
 
        //check mail verification 
-       if (user.isActive != true) return res.status(404).send("Please verify your email to login.");
+       //if (user.isActive != true) return res.status(404).send("Please verify your email to login.");
     
         /////////// create token by user id //////////
-       const token=jwt.sign({_id:user._id},process.env.SECRET_KEY)
-     return res.header('x-token',token).send({message:'user was logined successfully',email:user.email,
+       const token=jwt.sign({_id:user._id,isAdmin:false},process.env.SECRET_KEY)
+     return res.header('x-token',token).send({message:'logined in successfully',isAdmin:user.isAdmin,
         token:token}) 
     
   })
