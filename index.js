@@ -35,6 +35,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(function (req, res, next) {
+  req.header("Access-Control-Request-Headers", "*"),
+  req.header("Access-Control-Request-Method", "*")
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
   res.header("Access-Control-Allow-Methods", "*");
