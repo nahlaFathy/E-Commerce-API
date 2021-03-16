@@ -83,7 +83,9 @@ body('password').isLength({ min: 4 })
        new: true
        });
      if(user)
+       {res.setHeader("Access-Control-Allow-Origin", "*")
        return res.send({message:'user was edited successfully',image:user.image})
+       }
      else
        return  res.send({message:'This user id is not exist'})
       
