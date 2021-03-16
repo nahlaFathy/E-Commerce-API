@@ -12,7 +12,7 @@ function upload(file) {
     });
 
     return new Q.Promise((resolve, reject) => {
-        cloudinary.v2.uploader.upload(file, {width: 100, height: 100,type: "public",access_type: "anonymous" ,skipAuthorization: true}, (err, res) => {
+        cloudinary.v2.uploader.upload(file, {width: 100, height: 100,type: "upload",access_type: "anonymous" ,Access_mode:"public",skipAuthorization: true}, (err, res) => {
             if (err) {
                 console.log('cloudinary err:', err);
                 reject(err);
