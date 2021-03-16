@@ -6,7 +6,8 @@ const Product= require('../schema/product');
 const auth=require('../middleware/auth')
 const cloudinary=require('../middleware/cloudinary').upload
 const upload=require('../middleware/upload')
-let imageUrl;
+
+
 
 
 //////////////////// add new product //////////////////////////////
@@ -104,6 +105,7 @@ router.patch('/:id',auth, async(req, res) => {
         await cloudinary.uploader.destroy(product.cloudinary_id);
         await Product.deleteOne(product)
         return res.send({message:'product deleted successfuly'})
+        
                
        
    })
