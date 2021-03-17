@@ -64,8 +64,10 @@ body('password').isLength({ min: 4 })
   router.patch('/image',upload
   , async(req, res) => {
          ///// body validation
+         console.log(req.file)
         try{
-          let image =  await cloudinary(req.file.path);             
+          let image =  await cloudinary(req.file.path); 
+          console.log(image)            
          return res.send(`${image.url}, ${image.public_id}`)
         }catch(e){
           return res.send({error:e})
