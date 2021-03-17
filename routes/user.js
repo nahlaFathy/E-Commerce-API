@@ -33,17 +33,7 @@ body('password').isLength({ min: 4 })
        let isUser=await User.findOne({username:req.body.username})
        if(isUser) return res.status(400).send('user already registered') 
        ///////////////check if image uploaded 
-    /*  if (!req.files || _.isEmpty(req.files)) {
-        return res.status(400)
-            .send({error:"No file uploaded"})    }
-    try {
-        
-         image =  await cloudinary(req.file.path);
-        
-      } catch (e) {
-        console.log("err :", e);
-        return next(e);
-    }*/
+    
        ////// create new user
        const user =new User({
          email:req.body.email,
@@ -83,10 +73,11 @@ body('password').isLength({ min: 4 })
 
 /////////////////////// get all users ////////////////////////////////
   router.get('/',auth, async(req, res)=> {
-  
-    const users= await User.find();
+    const loginedID=req.user._id
+    const user= await User.findById(loginedID);
+    
      
-     return res.send('registered users :' + users)
+     return res.send( user)
  
     })
 
@@ -97,8 +88,7 @@ body('password').isLength({ min: 4 })
  
     const loginedID=req.user._id
     const user= await User.findById(loginedID);
-    await cloudinary.uploader.destroy(user.cloudinary_id);
-    const image = await cloudinary(req.file.path);
+   
         const updates={
          email:req.body.email,
          username:req.body.username,
