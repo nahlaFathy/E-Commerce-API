@@ -76,21 +76,24 @@ body('password').isLength({ min: 4 })
     const loginedID=req.user._id
     const user= await User.findById(loginedID);
     
-     
+     console.log(user)
      return res.send( user)
- 
+    
     })
 
 
 ///////////////////////// edit user by id///////////////////////////////
 
-   router.patch('/edit', auth,async(req, res) => {
+   router.patch('/update', auth,async(req, res) => {
  
     const loginedID=req.user._id
     const user= await User.findById(loginedID);
-   
+    console.log(User.toString())
+    console.log(req.user._id)
+      console.log(user)
+      console.log(req.body)
         const updates={
-         email:req.body.email ||user.email,
+         email:req.body.email?req.body.email :user.email,
          username:req.body.username||user.username,
          password:req.body.password||user.password,
          gender:req.body.gender||user.gender  ,
