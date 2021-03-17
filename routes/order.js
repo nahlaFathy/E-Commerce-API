@@ -7,12 +7,15 @@ const admin = require('../middleware/admin');
 
 router.post('/', auth, async (req, res) => {
     
+    const errors = validationResult(req); 
+       if (!errors.isEmpty()) return res.status(400).send({error: errors.errors[0].msg });        
+       
     const order =new orders({
+        
         _user:req.user._id,
-       totalPrice:req.body.totalPrice,
+        totalPrice:req.body.totalPrice,
         productTitle:req.body.productTitle,
-      
-       status:req.body.status,
+        status:req.body.status,
        
        
        });
@@ -20,9 +23,7 @@ router.post('/', auth, async (req, res) => {
      
       ///// save new user
    try{
-       await orders.save()
-      
-      
+       await order.save()
       return res.send({message:'order added successfully'}) 
    }
    catch(err){

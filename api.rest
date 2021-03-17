@@ -1,10 +1,13 @@
-PATCH  http://localhost:3000/api/users/edit
+PATCH  https://thawing-eyrie-89662.herokuapp.com/api/users/update
 user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDUwN2UxMDMwMGNmODAwMTU4YTJlYjMiLCJpYXQiOjE2MTU5ODYxMTB9.PXJnLlPyR70l8MtqW4rlZ67OXwflS03MTbWwRS1JdBA
 Content-Type: application/json
 
 {
     "username":"admin"
 }
+###
+GET   https://thawing-eyrie-89662.herokuapp.com/api/users
+user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDUwN2UxMDMwMGNmODAwMTU4YTJlYjMiLCJpYXQiOjE2MTU5ODYxMTB9.PXJnLlPyR70l8MtqW4rlZ67OXwflS03MTbWwRS1JdBA
 
 
 ###
@@ -15,4 +18,15 @@ POST http://localhost:3000/api/users/register
     "username":"nehal",
     "password":"12345",
     "gender":"female"
+}
+
+###
+POST https://thawing-eyrie-89662.herokuapp.com/api/order
+
+user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDUwN2UxMDMwMGNmODAwMTU4YTJlYjMiLCJpYXQiOjE2MTU5ODYxMTB9.PXJnLlPyR70l8MtqW4rlZ67OXwflS03MTbWwRS1JdBA
+Content-Type: application/json
+
+{
+    "totalPrice":20,
+    "productTitle":"ai haga"
 }
