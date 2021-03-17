@@ -106,7 +106,7 @@ body('password').isLength({ min: 4 })
 
    router.patch('/edit', auth,async(req, res) => {
  
-    console.log("im in",user)
+    
 
     const user= await User.findByIdAndUpdate(loginedID,{
       $set:{

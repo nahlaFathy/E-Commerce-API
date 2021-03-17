@@ -84,9 +84,9 @@ router.patch('/:id',auth, async(req, res) => {
        const image = await cloudinary(req.file.path);
           const updated= await Product.updateOne(product,{
             $set:{
-             title:req.body.title,
-             price:req.body.price,
-             details:req.body.details,
+             title:req.body.title||product.title,
+             price:req.body.price||product.price,
+             details:req.body.details||product.details,
              image:image.url||product.image,
              cloudinary_id:image.public_id||product.cloudinary_id  
             }
