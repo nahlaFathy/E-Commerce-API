@@ -6,8 +6,7 @@ const Product= require('../schema/product');
 const auth=require('../middleware/auth')
 const cloudinary=require('../middleware/cloudinary').upload
 const upload=require('../middleware/upload')
-
-
+let imageUrl;
 
 
 //////////////////// add new product //////////////////////////////
@@ -80,13 +79,13 @@ router.patch('/:id',auth, async(req, res) => {
         return res.send({error:'this product id is not exist'})
        }
   
-      // await cloudinary.uploader.destroy(product.cloudinary_id);
-      // const image = await cloudinary(req.file.path);
+       await cloudinary.uploader.destroy(product.cloudinary_id);
+       const image = await cloudinary(req.file.path);
           const updated= await Product.updateOne(product,{
             $set:{
-             title:req.body.title||product.title,
-             price:req.body.price||product.price,
-             details:req.body.details||product.details,
+             title:req.body.title,
+             price:req.body.price,
+             details:req.body.details,
              image:image.url||product.image,
              cloudinary_id:image.public_id||product.cloudinary_id  
             }
@@ -102,10 +101,9 @@ router.patch('/:id',auth, async(req, res) => {
 
         const product= await Product.findById(req.params.id);
         if(!product) return res.send({error:'this product id is not exist'})
-        //await cloudinary.uploader.destroy(product.cloudinary_id);
+        await cloudinary.uploader.destroy(product.cloudinary_id);
         await Product.deleteOne(product)
         return res.send({message:'product deleted successfuly'})
-        
                
        
    })

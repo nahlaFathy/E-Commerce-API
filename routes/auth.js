@@ -36,7 +36,7 @@ body('password').isLength({ min: 1 })
     
         /////////// create token by user id //////////
        const token=jwt.sign({_id:user._id},process.env.SECRET_KEY)
-     return res.header('user-token',token).send({message:'logined in successfully',isAdmin:user.isAdmin,
+     return res.header('x-token',token).send({message:'logined in successfully',isAdmin:user.isAdmin,
         token:token}) 
     
   })
