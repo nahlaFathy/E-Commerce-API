@@ -13,10 +13,9 @@ const schema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    productTitle: {
-        type: String,
-        required: true,
-        minlength: 3,
+    _product: {
+        type: [mongoose.ObjectId],
+        ref: "products",
     },
     status: {
         type: String,
@@ -31,7 +30,7 @@ module.exports.validateOrder = function validateOrder(order) {
     const schema = Joi.object({
         _user: Joi.objectId().required(),
         totalPrice: Joi.number().required(),
-        productTitle: Joi.string().required().trim().min(3),
+        _product: Joi.array().items(Joi.objectId()),
         status: Joi.array().valid('accepted', 'rejected', 'pending'),
     })
     return schema.validate(order);
