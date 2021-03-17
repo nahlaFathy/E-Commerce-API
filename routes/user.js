@@ -90,7 +90,7 @@ body('password').isLength({ min: 4 })
     const loginedID=req.user._id
     let user= await User.findById(loginedID);
       
-      req.body.forEach(element => {
+     
          if(req.body.username=="")
          req.body.username=user.username
          if(req.body.email=="")
@@ -99,7 +99,7 @@ body('password').isLength({ min: 4 })
          req.body.password=user.password
          if(req.body.gender=="")
          req.body.gender=user.gender
-      });
+      
         let updates={
          email:req.body.email,
          username:req.body.username,
