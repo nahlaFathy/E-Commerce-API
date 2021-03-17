@@ -117,7 +117,7 @@ body('password').isLength({ min: 4 })
    router.delete('/delete',auth, async(req, res) => {
         const loginedID=req.user._id
         const user= await User.findById(loginedID);
-        await cloudinary.uploader.destroy(user.cloudinary_id);
+       // await cloudinary.uploader.destroy(user.cloudinary_id);
         await User.deleteOne(user)
         if(user) return res.send({message:'user deleted successfuly'})
    })
