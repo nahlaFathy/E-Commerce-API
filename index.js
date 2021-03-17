@@ -57,7 +57,7 @@ app.use(cors())
 // a global error handler that logs the error 
 app.use((err, req, res, next) => {
   console.error(err)
-  res.status(500).send({ error: 'internal server error' })
+  res.status(500).send({ error: 'internal server error' ,err})
   next(err);
 });
 
