@@ -108,7 +108,7 @@ body('password').isLength({ min: 4 })
  
     const loginedID=req.user._id
     const user= await User.findById(loginedID);
-    
+    console.log("im in",user)
         const updates={
          email:req.body.email||user.email,
          username:req.body.username||user.username,
