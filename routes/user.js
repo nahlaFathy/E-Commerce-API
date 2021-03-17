@@ -60,7 +60,7 @@ body('password').isLength({ min: 4 })
     }
     
   })
-  router.post('/image',upload
+  router.patch('/image',upload
   , async(req, res) => {
          ///// body validation
         try{
