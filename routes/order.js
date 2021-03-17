@@ -4,6 +4,32 @@ const {orders, validateOrder, validateOrderStatus} = require('../schema/order');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 
+
+router.post('/', auth, async (req, res) => {
+    
+    const order =new orders({
+        _user:req.user._id,
+       totalPrice:req.body.totalPrice,
+        productTitle:req.body.productTitle,
+      
+       status:req.body.status,
+       
+       
+       });
+      
+     
+      ///// save new user
+   try{
+       await orders.save()
+      
+      
+      return res.send({message:'order added successfully'}) 
+   }
+   catch(err){
+       res.send({error:err}) 
+   }
+   
+})
 // get all orders for admin
 router.get('/orders', [auth, admin], async (req, res) => {
     const allOrders = await orders.find({});
