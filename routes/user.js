@@ -8,6 +8,7 @@ const auth=require('../middleware/auth')
 const cloudinary=require('../middleware/cloudinary').upload
 const upload=require('../middleware/upload')
 const { sendMail } = require('../helpers/verifyMail');
+const { forEach } = require('underscore');
 let imageUrl;
 
 
@@ -88,15 +89,22 @@ body('password').isLength({ min: 4 })
  
     const loginedID=req.user._id
     let user= await User.findById(loginedID);
-    console.log(User.toString())
-    console.log(req.user._id)
-      console.log(user)
-      console.log(req.body)
+      
+      req.body.forEach(element => {
+         if(req.body.username=="")
+         req.body.username=user.username
+         if(req.body.email=="")
+         req.body.email=user.email
+         if(req.body.password=="")
+         req.body.password=user.password
+         if(req.body.gender=="")
+         req.body.gender=user.gender
+      });
         let updates={
-         email:req.body.email?req.body.email :user.email,
-         username:req.body.username||user.username,
-         password:req.body.password||user.password,
-         gender:req.body.gender||user.gender  ,
+         email:req.body.email,
+         username:req.body.username,
+         password:req.body.password,
+         gender:req.body.gender  ,
        ////  image:image.url||user.image,
        //  cloudinary_id:image.public_id||user.cloudinary_id      
         }
