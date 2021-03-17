@@ -84,21 +84,21 @@ body('password').isLength({ min: 4 })
 
 ///////////////////////// edit user by id///////////////////////////////
 
-   router.patch('/update',async(req, res) => {
+   router.patch('/update', auth,async(req, res) => {
  
     const loginedID=req.user._id
-    const user= await User.findById(loginedID);
+    let user= await User.findById(loginedID);
     console.log(User.toString())
     console.log(req.user._id)
       console.log(user)
       console.log(req.body)
-        const updates={
+        let updates={
          email:req.body.email?req.body.email :user.email,
          username:req.body.username||user.username,
          password:req.body.password||user.password,
          gender:req.body.gender||user.gender  ,
-         image:image.url||user.image,
-         cloudinary_id:image.public_id||user.cloudinary_id      
+       ////  image:image.url||user.image,
+       //  cloudinary_id:image.public_id||user.cloudinary_id      
         }
         user = await User.findByIdAndUpdate(loginedID, updates, {
           new: true
