@@ -106,22 +106,22 @@ body('password').isLength({ min: 4 })
 
    router.patch('/edit', auth,async(req, res) => {
  
-    const loginedID=req.user._id
-    const user= await User.findById(loginedID);
     console.log("im in",user)
-        const updates={
-         email:req.body.email,
-         username:req.body.username,
-         password:req.body.password,
-         gender:req.body.gender  ,   
-        }
-        user = await User.findByIdAndUpdate(loginedID, updates, {
-          new: true
-          });
-        if(user)
-          return res.send({message:'user was edited successfully',user:user})
-        else
-          return  res.send({message:'This user id is not exist'})
+
+    const user= await User.findByIdAndUpdate(loginedID,{
+      $set:{
+        email:req.body.email||user.email,
+         username:req.body.username||user.username,
+         password:req.body.password||user.password,
+         gender:req.body.gender||user.gender 
+      }
+  },{new:true});
+      if(user)
+        return res.send({message:'user was edited successfully',user:user})
+      else
+        return  res.send({message:'This user id is not exist'})
+    
+       
 
    })
 
