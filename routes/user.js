@@ -90,23 +90,15 @@ body('password').isLength({ min: 4 })
     const loginedID=req.user._id
     let user= await User.findById(loginedID);
       
-     
-         if(req.body.username=="")
-         req.body.username=user.username
-         if(req.body.email=="")
-         req.body.email=user.email
-         if(req.body.password=="")
-         req.body.password=user.password
-         if(req.body.gender=="")
-         req.body.gender=user.gender
+     console.log(req.body)
+      
       
         let updates={
-         email:req.body.email,
-         username:req.body.username,
-         password:req.body.password,
-         gender:req.body.gender  ,
-       ////  image:image.url||user.image,
-       //  cloudinary_id:image.public_id||user.cloudinary_id      
+         email:(req.body.email!=""&&req.body.email!=null)?req.body.email:user.email,
+         username:(req.body.username!=""&&req.body.username!=null)?req.body.username:user.username,
+         password:(req.body.password!=""&&req.body.password!=null)?req.body.password:user.password,
+         gender:(req.body.gender!=""&&req.body.gender!=null)?req.body.gender:user.gender  
+          
         }
         user = await User.findByIdAndUpdate(loginedID, updates, {
           new: true
