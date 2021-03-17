@@ -3,6 +3,7 @@ const router = express.Router();
 const { carts, validateCart, validateCartUpdate } = require('../schema/cart');
 const products = require('../schema/product');
 const auth = require('../middleware/auth');
+const { orders, validateOrder } = require('../schema/order');
 
 // get all products in cart for user
 router.get('/', auth, async function (req, res) {
@@ -67,6 +68,42 @@ router.post('/', auth, async function (req, res) {
             { $addToSet: { _product: req.body._product } }
         )
         res.send("product added to cart successfully.")
+    }
+    catch (err) {
+        res.send({ error: err })
+    }
+})
+
+//checkout cart to order
+router.post('/checkout', auth, async function (req, res) {
+    try {
+        //define the order products and price
+        const _user = req.user._id;
+        const value = {
+            _product: req.body._product,
+            totalPrice: req.body.totalPrice,
+            _user
+        }
+        //validation
+        const { error } = validateOrder(value);
+        if (error) return res.status(400).send(error.details[0].message);
+
+        //create order for the user 
+        const order = new orders(value);
+        await order.save();
+
+        //update and delete the products from the cart 
+        //find the cart of this user 
+        const cart = await carts.findOne({ _user });
+        if (!cart) return res.status(404).send("failed to find the cart.");
+        const cartValue = {
+            _product: [],
+            _user
+        }
+        if (_user != cart._user) return res.status(405).send('method not allowed.');
+        //update the cart 
+        await carts.findByIdAndUpdate(cart._id, cartValue);
+        res.send("order created successfully.")
     }
     catch (err) {
         res.send({ error: err })
