@@ -39,8 +39,9 @@ app.use(function (req, res, next) {
   req.header("Access-Control-Request-Method", "*")
   
   res.header("Access-Control-Allow-Origin", "https://cloudinary.com/");
+  res.header("Access-Control-Allow-Headers", "*");
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
   res.header("Access-Control-Allow-Methods", "*");
   next();
 });
