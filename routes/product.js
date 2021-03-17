@@ -80,8 +80,8 @@ router.patch('/:id',auth, async(req, res) => {
         return res.send({error:'this product id is not exist'})
        }
   
-       await cloudinary.uploader.destroy(product.cloudinary_id);
-       const image = await cloudinary(req.file.path);
+      // await cloudinary.uploader.destroy(product.cloudinary_id);
+      // const image = await cloudinary(req.file.path);
           const updated= await Product.updateOne(product,{
             $set:{
              title:req.body.title||product.title,
