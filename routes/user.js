@@ -84,7 +84,7 @@ body('password').isLength({ min: 4 })
 
 ///////////////////////// edit user by id///////////////////////////////
 
-   router.patch('/update', auth,async(req, res) => {
+   router.patch('/update',async(req, res) => {
  
     const loginedID=req.user._id
     const user= await User.findById(loginedID);
