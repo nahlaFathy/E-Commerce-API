@@ -61,14 +61,27 @@ body('password').isLength({ min: 4 })
     }
     
   })
-  router.patch('/image',upload
+  router.patch('/image',upload,auth
   , async(req, res) => {
          ///// body validation
          console.log(req.file)
+         const loginedID=req.user._id
+          if (!req.files || _.isEmpty(req.files)) {
+          return res.status(400).send({error:"No file uploaded"})
+          }
+          let _image =  req.file.path
+         let updates =
+        { image:_image}
         try{
-          let image =  await cloudinary(req.file.path); 
-          console.log(image)            
-         return res.send(`${image.url}, ${image.public_id}`)
+         
+          user = await User.findByIdAndUpdate(loginedID, updates, {
+            new: true
+            });
+          if(user)
+            return res.send({message:'user was edited successfully',user:user})
+          else
+            return  res.send({message:'This user id is not exist'})
+        
         }catch(e){
           return res.send({error:e})
         } 
