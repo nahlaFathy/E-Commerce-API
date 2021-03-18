@@ -42,7 +42,7 @@ body('title').isLength({ min: 1 })
        })
     try{
         await product.save()
-       res.send({message:'a new product is added successfully'}) 
+       res.send({message:'a new product is added successfully',product:product}) 
     }
     catch(err){
         res.send({error:err}) 
