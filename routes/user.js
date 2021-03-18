@@ -72,7 +72,6 @@ router.patch('/image', upload, auth
 
     console.log(`${process.env.API}/${_image}`)
 
-
     try {
       if (_image) {
         updates =
@@ -86,7 +85,7 @@ router.patch('/image', upload, auth
         new: true
       });
       if (user)
-        return res.send({ message: 'user was edited successfully', user: user })
+        return res.send({ message: 'user was edited successfully', image: user.image })
       else
         return res.send({ message: 'This user id is not exist' })
 
