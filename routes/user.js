@@ -66,12 +66,11 @@ body('password').isLength({ min: 4 })
          ///// body validation
          console.log(req.file)
          const loginedID=req.user._id
-          if (!req.files || _.isEmpty(req.files)) {
-          return res.status(400).send({error:"No file uploaded"})
-          }
-          let _image =  req.file.path
+         
+          let _image =  req.file.filename
+          console.log(`${process.env.API}/${_image}`)
          let updates =
-        { image:_image}
+        { image:`${process.env.API}/${_image}`}
         try{
          
           user = await User.findByIdAndUpdate(loginedID, updates, {
