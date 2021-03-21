@@ -4,6 +4,7 @@ const { carts, validateCart, validateCartUpdate } = require('../schema/cart');
 const products = require('../schema/product');
 const auth = require('../middleware/auth');
 const { orders, validateOrder } = require('../schema/order');
+const users = require('../schema/user');
 
 // get all products in cart for user
 router.get('/', auth, async function (req, res) {
