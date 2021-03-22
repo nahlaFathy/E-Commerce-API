@@ -35,3 +35,16 @@ Content-Type: application/json
 ###
 DELETE  https://thawing-eyrie-89662.herokuapp.com/api/users/delete
 user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDUwOTQ5MmZiYTE0MTAwMTUyMDhlOTgiLCJpYXQiOjE2MTYwMjAyMzR9.6csG3z74pBf2Z_b4_ZgvoRI5FmjNCb2TFUe77aFIbDQ
+
+###
+POST  https://thawing-eyrie-89662.herokuapp.com/api/cart/checkout
+Content-Type: application/json
+//user-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDUyMDNkNGE2NGE5MDAwMTVmMTBhMTciLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjE2MzI2Mzg4fQ.rKguFkjfYAGvLeLu97MQewtKAk4EQ_-I3kGn1HAm5Vw
+
+{
+    
+   
+    "_product":["6055e25409f5770015ffc745","6055e3f809f5770015ffc746"],
+    "totalPrice":35
+
+}

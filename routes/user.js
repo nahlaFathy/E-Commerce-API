@@ -32,7 +32,7 @@ router.post('/register'
 
     ////// chech if user register before
     let isUser = await User.findOne({ username: req.body.username })
-    if (isUser) return res.status(400).send('user already registered')
+    if (isUser) return res.status(400).send('This email already registered')
     ///////////////check if image uploaded 
 
     ////// create new user
