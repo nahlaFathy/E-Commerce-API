@@ -70,12 +70,12 @@ router.patch('/image', upload, auth
     let user = await User.findById(loginedID);
     let _image = req.file.filename
 
-    console.log(`${process.env.IMAGES}/${_image}`)
+    console.log(`${process.env.API}/${_image}`)
 
     try {
       if (_image) {
         updates =
-        { image: `${process.env.IMAGES}/${_image}` }
+        { image: `${process.env.API}/${_image}` }
       }
       else {
         updates =
