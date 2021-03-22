@@ -24,7 +24,7 @@ body('password').isLength({ min: 1 })
        if (!errors.isEmpty()) return res.status(400).send({error: errors.errors[0].msg });        
        
        //////////////chech if username is registered
-       let user=await User.findOne({email:req.body.email})
+       let user=await User.findOne({email:req.body.email.toLowerCase()})
        if(!user) return res.status(400).send('invalid email or password') 
        
        /////////// chech if password match usename password 
