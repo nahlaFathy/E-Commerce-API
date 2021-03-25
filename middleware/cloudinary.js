@@ -1,7 +1,7 @@
-const cloudinary = require("cloudinary").v2;
+/*const cloudinary = require("cloudinary").v2;
 const _ = require('underscore');
 
-const Q = require("q");
+//const Q = require("q");
 
 function upload(file) {
     cloudinary.config({
@@ -25,4 +25,4 @@ function upload(file) {
 };
 
 
-module.exports.upload = upload;
+module.exports.upload = upload;*/

@@ -3,12 +3,38 @@ const router = express.Router();
 const {orders, validateOrderStatus} = require('../schema/order');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
+var _ = require('lodash');
 
 // get all orders for admin
 router.get('/orders', [auth, admin], async (req, res) => {
     const allOrders = await orders.find({});
     if (!allOrders) return res.send("orders don't exist.");
     res.send(allOrders);
+})
+
+// get order by product Id
+router.get('/orders/:id', async (req, res) => {
+    const allOrders = await orders.find({});
+    if (allOrders){
+   var picked=0
+   _.filter(allOrders, x =>
+    {
+        x._product.every(element => {
+            console.log(element)
+           if( element == req.params.id)
+           {
+               picked=1;
+               return false
+           }
+        });
+    });
+    if(picked==1)
+    return res.send("1")
+    else
+     return res.send("0")
+  }
+    
+   
 })
 
 // get all orders for user
