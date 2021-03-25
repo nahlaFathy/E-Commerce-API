@@ -13,7 +13,7 @@ router.get('/orders', [auth, admin], async (req, res) => {
 })
 
 // get order by product Id
-router.get('/orders/:id', async (req, res) => {
+router.get('/orders/:id',  [auth, admin],async (req, res) => {
     const allOrders = await orders.find({});
     if (allOrders){
    var picked=0
