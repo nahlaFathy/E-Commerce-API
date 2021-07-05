@@ -9,7 +9,7 @@ const cloudinary = require('../middleware/cloudinary').upload
 const upload = require('../middleware/upload')
 const { sendMail } = require('../helpers/verifyMail');
 const { forEach } = require('underscore');
-let imageUrl;
+
 
 
 
@@ -99,7 +99,6 @@ router.get('/', auth, async (req, res) => {
   const loginedID = req.user._id
   const user = await User.findById(loginedID);
 
-  console.log(user)
   return res.send(user)
 
 })

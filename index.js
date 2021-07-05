@@ -4,11 +4,7 @@ const app = express();
 require('./dbConnection');
 const port = 3000;
 const user = require('./routes/user');
-const admin = require('./routes/admin');
-const product = require('./routes/product');
-const order = require('./routes/order');
-const auth = require('./routes/auth');
-const cart = require('./routes/cart');
+
 var cors = require('cors')
 
 require('dotenv').config();
@@ -55,6 +51,8 @@ app.use((err, req, res, next) => {
   res.status(500).send({ error: 'internal server error' })
   next(err);
 });
+
+
 
 app.listen(process.env.PORT || port, () => {
   console.info(`server listening on port 3000`);

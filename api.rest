@@ -48,3 +48,6 @@ Content-Type: application/json
     "totalPrice":35
 
 }
+
+###
+GET http://localhost:3000/api/order/orders/6055e3f809f5770015ffc74
