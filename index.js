@@ -4,7 +4,10 @@ const app = express();
 require('./dbConnection');
 const port = 3000;
 const user = require('./routes/user');
-
+const product =require('./routes/product');
+const cart =require('./routes/cart');
+const order =require('./routes/order');
+const auth=require('./routes/auth')
 var cors = require('cors')
 
 require('dotenv').config();
@@ -38,7 +41,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/api/users', user);
-app.use('/api/admin', admin);
+//app.use('/api/admin', admin);
 app.use('/api/product', product);
 app.use('/api/order', order);
 app.use('/api/cart', cart);
